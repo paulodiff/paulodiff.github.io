@@ -5,7 +5,7 @@ function addToLog(l) {
     document.getElementById('t1').value + '\n' + l;
 }
 
-addToLog('v1');
+addToLog('v 1.0.3');
 
 function clearLog() {
   document.getElementById('t1').value = '';
