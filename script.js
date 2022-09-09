@@ -71,6 +71,7 @@ function listDevices() {
 const getCameraSelection = async () => {
   const devices = await navigator.mediaDevices.enumerateDevices();
   const videoDevices = devices.filter((device) => device.kind === 'videoinput');
+
   const options = videoDevices.map((videoDevice) => {
     return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
   });
@@ -170,7 +171,7 @@ if (Modernizr.getusermedia) {
 // add stream
 document.getElementById('btnPlay').onclick = () => {
 
-
+  addToLog('play on ' + cameraOptions.value + ' ' + streamStarted);
   console.log('play on ', cameraOptions.value, streamStarted);
   
 
