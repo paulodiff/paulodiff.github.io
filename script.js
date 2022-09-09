@@ -11,6 +11,8 @@ function clearLog() {
   document.getElementById('t1').value = '';
 }
 
+/*
+
 function requireVideo() {
   navigator.getUserMedia(
     // constraints
@@ -29,6 +31,7 @@ function requireVideo() {
   );
 }
 
+
 function requireAudio() {
   navigator.getUserMedia(
     // constraints
@@ -46,6 +49,8 @@ function requireAudio() {
     }
   );
 }
+
+*/
 
 function listDevices() {
   if (!navigator.mediaDevices?.enumerateDevices) {
@@ -124,8 +129,8 @@ function onTakePhotoButtonClick() {
   .catch(error => console.error(error));
 }
 
-document.getElementById('btnAudio').onclick = requireAudio;
-document.getElementById('btnVideo').onclick = requireVideo;
+// document.getElementById('btnAudio').onclick = requireAudio;
+// document.getElementById('btnVideo').onclick = requireVideo;
 document.getElementById('btnListDevices').onclick = listDevices;
 document.getElementById('btnClearLog').onclick = clearLog;
 document.getElementById('btnCheckPermission').onclick = checkPermission;
