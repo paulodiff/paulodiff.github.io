@@ -360,9 +360,9 @@ function drawCanvas(canvas, img) {
 function getCaps() {
   imageCapture.getPhotoCapabilities()
   .then(function(caps) {
-    console.log(" PhotoCapabilities retrieved ", caps);
+    console.log("PhotoCapabilities retrieved ", caps);
     addToLog(JSON.stringify(caps));
-    addToLog(caps.String());
+    
     theCapabilities = caps;
 
     if (theCapabilities.imageHeight) {
