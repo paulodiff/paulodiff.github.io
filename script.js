@@ -163,6 +163,27 @@ const constraints = {
 };
 
 
+function hasGetUserMedia() {
+
+  // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+  // gUM
+  console.log('.. check ....');
+  console.log(navigator.getUserMedia);
+  console.log(navigator.webkitGetUserMedia);
+  console.log(navigator.msGetUserMedia);
+  console.log(navigator.mozGetUserMedia);
+  console.log('mediaDevices' in navigator && navigator.mediaDevices.getUserMedia);
+
+  return !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
+          navigator.mozGetUserMedia || navigator.msGetUserMedia);
+}
+
+if (hasGetUserMedia()) {
+  // Good to go!
+} else {
+  alert('getUserMedia() is not supported in your browser');
+}
+
 if (Modernizr.getusermedia) {
   console.log('hasGetUserMedia');
   addToLog('hasGetUserMedia');
