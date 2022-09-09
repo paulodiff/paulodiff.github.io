@@ -57,6 +57,7 @@ function listDevices() {
     console.log('enumerateDevices() not supported.');
     addToLog('enumerateDevices() not supported.');
   } else {
+    addToLog('enumerating Devices ...');
     // List cameras and microphones.
     navigator.mediaDevices
       .enumerateDevices()
