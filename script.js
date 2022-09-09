@@ -176,6 +176,7 @@ document.getElementById('btnPlay').onclick = () => {
 
   if (streamStarted) {
     video.play();
+    getCaps();
     // play.classList.add('d-none');
     // pause.classList.remove('d-none');
     return;
@@ -212,6 +213,7 @@ const handleStream = (stream) => {
 
   console.log('Width: ' + stream_width + 'px');
   console.log('Height: ' + stream_height + 'px');
+  addToLog('Width: ' + stream_width + 'px' + '   ' + 'Height: ' + stream_height + 'px' );
 
 
   /*
@@ -350,6 +352,8 @@ function getCaps() {
   imageCapture.getPhotoCapabilities()
   .then(function(caps) {
     console.log(" PhotoCapabilities retrieved ", caps);
+    addToLog(JSON.stringify(caps));
+    addToLog(caps.String());
     theCapabilities = caps;
 
     if (theCapabilities.imageHeight) {
