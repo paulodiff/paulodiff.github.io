@@ -484,3 +484,9 @@ function getCaps() {
     console.log('Height: ' + stream_height + 'px');
 
     */
+
+    /*
+
+    https://codepen.io/chrisbeast/pen/ebYwpX
+
+    */
