@@ -176,6 +176,7 @@ document.getElementById('btnCheckPermission').onclick = checkPermission;
 document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
 document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
 
+
 const cameraOptions = document.querySelector('.video-options>select');
 let streamStarted = false;
 const video = document.querySelector('video');
@@ -236,7 +237,7 @@ if (Modernizr.getusermedia) {
 
 
 // add stream
-document.getElementById('btnPlay').onclick = () => {
+ function play() {
 
   addToLog('play on ' + cameraOptions.value + ' ' + streamStarted);
   console.log('play on ', cameraOptions.value, streamStarted);
@@ -321,6 +322,8 @@ function takePhoto() {
       console.error(error);
     });
 }
+
+document.getElementById('btnPlay').onclick = play;
 
 /*
  var now = Date.now();
