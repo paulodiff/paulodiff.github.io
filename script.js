@@ -353,7 +353,6 @@ function takePhoto2() {
     });
 }
 
-/
 
 
 document.getElementById('btnPlay').onclick = play;
