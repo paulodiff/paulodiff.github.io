@@ -1,5 +1,7 @@
 console.log('Start Js ...');
 
+
+
 // Opera 8.0+
 var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 
