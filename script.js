@@ -176,7 +176,7 @@ function onTakePhoto2ButtonClick() {
   imageCapture
     .takePhoto()
     .then((blob) => {
-      console.log(blob);
+      console.log('Took photo:', blob);
       var img = document.querySelector('img');
       console.log(img);
       let url = window.URL.createObjectURL(blob);
