@@ -161,6 +161,7 @@ function onGrabFrameButtonClick() {
 }
 
 function onTakePhotoButtonClick() {
+  console.log('onTakePhotoButtonClick');
   imageCapture.takePhoto()
   .then(blob => createImageBitmap(blob))
   .then(imageBitmap => {
@@ -176,7 +177,7 @@ document.getElementById('btnListDevices').onclick = listDevices;
 document.getElementById('btnClearLog').onclick = clearLog;
 document.getElementById('btnCheckPermission').onclick = checkPermission;
 document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
-document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
+
 
 
 const cameraOptions = document.querySelector('.video-options>select');
@@ -303,14 +304,18 @@ const handleStream = (stream) => {
   let mediaStreamTrack = stream.getVideoTracks()[0];
   imageCapture = new ImageCapture(mediaStreamTrack);
 
-
+ 
   getCaps();
 
 };
 
+/*
+img.classList.remove('hidden');
+img.src = URL.createObjectURL(blob);
+*/
 function takePhoto() {
   console.log('talePhoto');
-  var img = document.getElementById('img');
+  var img = document.getElementById('img2download');
 
   console.log(imageCapture);
 
@@ -326,6 +331,10 @@ function takePhoto() {
       console.error(error);
     });
 }
+
+// document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
+document.getElementById('btnTakePhoto').onclick = takePhoto;
+
 
 document.getElementById('btnPlay').onclick = play;
 
@@ -424,6 +433,14 @@ function drawCanvas(canvas, img) {
 
 
 function getCaps() {
+
+
+  imageCapture.getPhotoSettings()
+  .then(function(ps) {
+    console.log("PhotoSettings", ps);
+  });
+
+
   imageCapture.getPhotoCapabilities()
   .then(function(caps) {
     console.log("PhotoCapabilities retrieved ", caps);
