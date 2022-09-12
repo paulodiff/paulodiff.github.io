@@ -26,8 +26,10 @@
 	<!-- Configure a few settings and attach camera -->
 	<script language="JavaScript">
 		Webcam.set({
-			width: 320,
-			height: 240,
+			width: 240,
+			height: 320,
+			dest_width: 960,    
+		  dest_height: 1280, 
 			image_format: 'jpeg',
 			jpeg_quality: 90
 		});
@@ -47,7 +49,16 @@
 				// display results in page
 				document.getElementById('results').innerHTML = 
 					'<h2>Here is your image:</h2>' + 
-					'<img src="'+data_uri+'"/>';
+					'<img id="outImage" src="'+data_uri+'"/>';
+
+					var img = document.getElementById('outImage'); 
+					console.log(img);
+					//or however you get a handle to the IMG
+					var width = img.clientWidth;
+					var height = img.clientHeight;
+
+					console.log(width , height);
+
 			} );
 		}
 	</script>
