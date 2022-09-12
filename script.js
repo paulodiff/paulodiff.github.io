@@ -191,12 +191,12 @@ var imageCapture;
 const constraints = {
   video: {
     width: {
-      min: 1280,
+      min: 320,
       ideal: 1920,
       max: 2560,
     },
     height: {
-      min: 720,
+      min: 240,
       ideal: 1080,
       max: 1440,
     },
@@ -259,11 +259,13 @@ if (Modernizr.getusermedia) {
         exact: cameraOptions.value,
       },
     };
+    console.log('starting stream', updatedConstraints);
     startStream(updatedConstraints);
   }
 };
 
 const startStream = async (constraints) => {
+  console.log('startStream', constraints);
   const stream = await navigator.mediaDevices.getUserMedia(constraints);
   handleStream(stream);
 };

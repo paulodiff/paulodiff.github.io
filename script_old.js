@@ -54,8 +54,13 @@ play.onclick = () => {
 };
 
 const startStream = async (constraints) => {
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  handleStream(stream);
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleStream(stream);
+  } catch (err) {
+    console.log(err);
+  }  
+  
 };
 
 const handleStream = (stream) => {
