@@ -163,10 +163,22 @@ function onGrabFrameButtonClick() {
 function onTakePhotoButtonClick() {
   console.log('onTakePhotoButtonClick');
   imageCapture.takePhoto()
-  .then(blob => createImageBitmap(blob))
+  .then(blob => {
+    console.log(blob);
+    console.log(blob.type);
+    return createImageBitmap(blob);
+  })
   .then(imageBitmap => {
     const canvas = document.querySelector('#canvasTakePhoto');
+    console.log(`Photo size is ${imageBitmap.width}x${imageBitmap.height}`);
+
     drawCanvas(canvas, imageBitmap);
+    /*
+    var img = document.querySelector('img');
+    console.log(img);
+    let url = window.URL.createObjectURL(imageBitmap);
+    img.src = url;
+    */
   })
   .catch(error => console.error(error));
 }
