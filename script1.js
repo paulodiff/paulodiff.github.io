@@ -30,6 +30,10 @@ function gotDevices(deviceInfos) {
   }
 }
 
+function setUpGui() {
+
+}
+
 function getStream() {
   if (window.stream) {
     window.stream.getTracks().forEach(track => {
@@ -57,4 +61,14 @@ function gotStream(stream) {
 
 function handleError(error) {
   console.error('Error: ', error);
+}
+
+
+function showHideElementById(id) {
+  var x = document.getElementById(id);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }

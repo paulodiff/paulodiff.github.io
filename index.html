@@ -22,7 +22,8 @@
 </div>
 <div class="col-sm">
 <div class="select">
-<label for="videoSource">Video source: </label><select id="videoSource"></select>
+<label for="videoSource">Video source: </label>
+<select  class="form-select" id="videoSource"></select>
 </div>
 </div>
 
@@ -34,15 +35,16 @@
   width="320" height="240"
   class="embed-responsive-item"
   autoplay muted playsinline></video>
-
-  <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-primary">Left</button>
-  <button type="button" class="btn btn-primary">Middle</button>
-  <button type="button" class="btn btn-primary">Right</button>
-  </div>
-
   <canvas id="canvasGrabFrame" width="320" height="240"></canvas>
   <canvas id="canvasTakePhoto" width="320" height="240"></canvas>
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-primary">Scatta</button>
+  <button type="button" class="btn btn-primary">Carica</button>
+  <button type="button" class="btn btn-primary">Ripeti</button>
+  </div>
+
+ 
 
   <script async src="script1.js" ></script>
 
