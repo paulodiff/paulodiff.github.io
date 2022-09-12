@@ -171,12 +171,31 @@ function onTakePhotoButtonClick() {
   .catch(error => console.error(error));
 }
 
+function onTakePhoto2ButtonClick() {
+  console.log('onTakePhoto2ButtonClick');
+  imageCapture
+    .takePhoto()
+    .then((blob) => {
+      console.log(blob);
+      var img = document.querySelector('img');
+      console.log(img);
+      let url = window.URL.createObjectURL(blob);
+      img.src = url;
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 // document.getElementById('btnAudio').onclick = requireAudio;
 // document.getElementById('btnVideo').onclick = requireVideo;
 document.getElementById('btnListDevices').onclick = listDevices;
 document.getElementById('btnClearLog').onclick = clearLog;
 document.getElementById('btnCheckPermission').onclick = checkPermission;
 document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
+document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
+document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
 
 
 
@@ -313,18 +332,20 @@ const handleStream = (stream) => {
 img.classList.remove('hidden');
 img.src = URL.createObjectURL(blob);
 */
-function takePhoto() {
-  console.log('talePhoto');
-  var img = document.getElementById('img2download');
+function takePhoto2() {
+  console.log('takePhoto2');
+  
+  // var img = document.getElementById('img2download');
+  var img = document.querySelector('img');
 
   console.log(imageCapture);
+  console.log(img);
 
   imageCapture
     .takePhoto()
     .then((blob) => {
       let url = window.URL.createObjectURL(blob);
       img.src = url;
-
       window.URL.revokeObjectURL(url);
     })
     .catch((error) => {
@@ -332,8 +353,7 @@ function takePhoto() {
     });
 }
 
-// document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
-document.getElementById('btnTakePhoto').onclick = takePhoto;
+/
 
 
 document.getElementById('btnPlay').onclick = play;
