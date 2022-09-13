@@ -42,11 +42,23 @@
   <button class="btn btn-success" id="btnGrabFrame">Grab Frame</button>
   <button class="btn btn-success" id="btnTakePhoto">Take Photo</button>
   <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button>
+  <button class="btn btn-success" id="btnUpload">Upload</button>
   </div>
 
   <canvas id="canvasGrabFrame" width="320" height="240"></canvas>
   <canvas id="canvasTakePhoto" width="320" height="240"></canvas>
+  <div class="wrapper">
+  <header>File Uploader JavaScript</header>
 
+  <form action="#">
+    <input class="file-input" type="file" name="file">
+    <i class="fas fa-cloud-upload-alt"></i>
+    <p>Browse File to Upload</p>
+  </form>
+  <section class="progress-area"></section>
+  <section class="uploaded-area"></section>
+ </div>
+ 
   <script async src="script1.js" ></script>
 
 
