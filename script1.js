@@ -82,10 +82,11 @@ function showHideElementById(id) {
 }
 
 function onGrabFrameButtonClick() {
+  console.log('onGrabFrameButtonClick');
   imageCapture.grabFrame()
   .then(imageBitmap => {
     const canvas = document.querySelector('#canvasGrabFrame');
-    drawCanvas(canvas, imageBitmap);
+    drawCanvas(canvas, imageBitmap, true);
   })
   .catch(error => console.error(error));
 }
