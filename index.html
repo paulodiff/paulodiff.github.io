@@ -9,34 +9,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+<style>
+#video{
+  object-fit: initial;
+  width: 400px;
+  height: 300px;
+}
+</style>
 
 </head>
 
 <body>
 
 <div id="container">
-    
-<div class="row g-3">
-<div class="col-sm-7">
 
-</div>
-<div class="col-sm">
+<hr>
+
 <div class="select">
 <label for="videoSource">Video source: </label>
 <select  class="form-select" id="videoSource"></select>
 </div>
-</div>
 
-</div>
-
- 
+<hr>
 
   <video 
-  width="320" height="240"
+  width="600" height="500"
   class="embed-responsive-item"
   autoplay muted playsinline></video>
 
-  <canvas id="videoCanvas" width="640" height="480"></canvas>
+<hr>
 
 
   <div class="btn-group" role="group" aria-label="Basic example">
@@ -45,8 +46,9 @@
   <button class="btn btn-success" id="btnTakePhoto">Take Photo</button>
   <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button>
   <button class="btn btn-success" id="btnUploadFromCanvas">UploadFromCanvas</button>
-  
   </div>
+
+  <canvas id="videoCanvas" width="640" height="480"></canvas>
 
   <small>canvasGrabFrame</small>
   <canvas id="canvasGrabFrame" width="320" height="240"></canvas>

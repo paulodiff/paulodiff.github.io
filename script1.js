@@ -1,6 +1,10 @@
 'use strict';
 
 var videoElement = document.querySelector('video');
+
+videoElement.width=500;
+videoElement.height=240;
+
 var videoCanvas = document.getElementById('videoCanvas')
 var ctx = videoCanvas.getContext('2d');
 // var audioSelect = document.querySelector('select#audioSource');
