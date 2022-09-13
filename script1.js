@@ -37,6 +37,7 @@ function setUpGui() {
   document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
   document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
   document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
+  document.getElementById('btnUpload').onclick = uploadFile;
 
 }
 
@@ -167,23 +168,21 @@ function drawCanvas(canvas, img, resize) {
 
 // UPLOAD 
 
-const form = document.querySelector("form"),
-fileInput = document.querySelector(".file-input"),
-progressArea = document.querySelector(".progress-area"),
-uploadedArea = document.querySelector(".uploaded-area");
+var form = document.querySelector("form");
+var fileInput = document.querySelector(".file-input");
+var progressArea = document.querySelector(".progress-area");
+var uploadedArea = document.querySelector(".uploaded-area");
+var fileName;
 
+// document.getElementById('btnUpload').onclick = uploadFile('pro4va.png');
 
-document.getElementById('btnUpload').onclick = uploadFile('prova.png');
-
-form.addEventListener("click", () =>{
-  // fileInput.click();
-});
+// form.addEventListener("click", () =>{ // fileInput.click();});
 
 fileInput.onchange = ({target})=>{
   let file = target.files[0];
   if(file){
     console.log('onChange', file);
-    let fileName = file.name;
+    fileName = file.name;
     
     if(fileName.length >= 12){
       let splitName = fileName.split('.');
@@ -194,8 +193,9 @@ fileInput.onchange = ({target})=>{
   }
 }
 
-function uploadFile(name){
-  console.log('uploadFile', name);
+function uploadFile(){
+  console.log('uploadFile', fileName);
+  var name = fileName;
   let xhr = new XMLHttpRequest();
 
   console.log('uploadFile open xhr');
@@ -259,3 +259,13 @@ function uploadFile(name){
 
   xhr.send(data);
 }
+
+/*
+
+// JPEG file
+let file = null;
+let blob = document.querySelector("#canvas").toBlob(function(blob) {
+				file = new File([blob], 'test.jpg', { type: 'image/jpeg' });
+			}, 'image/jpeg');
+
+*/
