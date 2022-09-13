@@ -179,24 +179,43 @@ form.addEventListener("click", () =>{
 fileInput.onchange = ({target})=>{
   let file = target.files[0];
   if(file){
+    console.log('onChange', file);
     let fileName = file.name;
+    
     if(fileName.length >= 12){
       let splitName = fileName.split('.');
       fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
     }
-    uploadFile(fileName);
+    console.log('onChange', fileName);
+    // uploadFile(fileName);
   }
 }
 
 function uploadFile(name){
-  console.log('uploadFile');
+  console.log('uploadFile', name);
   let xhr = new XMLHttpRequest();
+
+  console.log('uploadFile open xhr');
   xhr.open("POST", "https://laravel-on-replit.paulodiff.repl.co/api/store-image");
+
+  xhr.onreadystatechange = function (oEvent) {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText)
+        } else {
+           console.log("Error", xhr.statusText);
+        }
+    }
+};
+
   xhr.upload.addEventListener("progress", ({loaded, total}) =>{
     let fileLoaded = Math.floor((loaded / total) * 100);
     let fileTotal = Math.floor(total / 1000);
     let fileSize;
     (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
+
+    console.log('progress', loaded, total, fileSize, fileTotal);
+
     let progressHTML = `<li class="row">
                           <i class="fas fa-file-alt"></i>
                           <div class="content">
@@ -209,8 +228,11 @@ function uploadFile(name){
                             </div>
                           </div>
                         </li>`;
+
     uploadedArea.classList.add("onprogress");
+
     progressArea.innerHTML = progressHTML;
+
     if(loaded == total){
       progressArea.innerHTML = "";
       let uploadedHTML = `<li class="row">
@@ -226,7 +248,11 @@ function uploadFile(name){
       uploadedArea.classList.remove("onprogress");
       uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
     }
+
   });
+
+
   let data = new FormData(form);
+
   xhr.send(data);
 }
