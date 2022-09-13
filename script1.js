@@ -2,20 +2,45 @@
 
 var videoElement = document.querySelector('video');
 
-videoElement.width=500;
-videoElement.height=240;
+// videoElement.width=500;
+//videoElement.height=240;
 
 var videoCanvas = document.getElementById('videoCanvas')
 var ctx = videoCanvas.getContext('2d');
+ctx.canvas.width = videoElement.width;
+ctx.canvas.height = videoElement.height;
+
+var vRatio = (ctx.canvas.height / videoElement.width) * videoElement.width;
+// ctx.drawImage(v, 0,0, vRatio, c.height);
+
+// fill horizontally  
+var hRatio = (ctx.canvas.width / videoElement.height) * videoElement.height;
+
+
+console.log('cx ',  ctx.canvas.width, ctx.canvas.height);
+
 // var audioSelect = document.querySelector('select#audioSource');
 
 videoElement.addEventListener('play', function () {
   var $this = this; //cache
   (function loop() {
       if (!$this.paused && !$this.ended) {
-          ctx.canvas.width = $this.videoWidth;
-          ctx.canvas.height = $this.videoHeight;
-          ctx.drawImage($this, 0, 0);
+
+
+        
+
+    // var c = canvasElement, v=videoElement;
+    // fill vertically  
+    var vRatio = (ctx.canvas.height / $this.videoHeight) * $this.videoWidth;
+    // ctx.drawImage(v, 0,0, vRatio, c.height);
+
+    // fill horizontally  
+    var hRatio = (ctx.canvas.width / $this.videoWidth) * $this.videoHeight;
+    ctx.drawImage($this, 0,0, vRatio, hRatio);
+
+          
+
+          // ctx.drawImage($this, 0, 0);
           setTimeout(loop, 1000 / 30); // drawing at 30fps
       }
   })();
