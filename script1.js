@@ -152,7 +152,7 @@ function showHideElementById(id) {
 
 function onGrabFrameButtonClick() {
   console.log('onGrabFrameButtonClick');
-  log2video('foto acquisita!');
+  log2video('Foto acquisita! Carica o scatta');
 
   imageCapture.grabFrame()
   .then(imageBitmap => {
@@ -484,7 +484,7 @@ function uploadForm(frm)
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           console.log('uploadForm', xhr.responseText)
-          log2video('Upload ok!');
+          log2video('Caricamento ok!');
         } else {
            console.log("Error", xhr.statusText);
            log2video('Upload ERROR!');
