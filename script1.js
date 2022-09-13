@@ -152,7 +152,7 @@ function showHideElementById(id) {
 
 function onGrabFrameButtonClick() {
   console.log('onGrabFrameButtonClick');
-  log2video('Foto acquisita! Carica o scatta');
+  log2video('Foto acquisita! Carica o scatta di nuovo!');
 
   imageCapture.grabFrame()
   .then(imageBitmap => {
@@ -348,7 +348,7 @@ const uploadFileFromCanvas = async () => {
   var name = fileName;
   
 
-  log2video('caricamento ...');
+  log2video('Caricamento ...');
   console.log('uploadFileFromCanvas', 'create image from canvas')
 
   // const blob = await new Promise(resolve => canvasElem.toBlob(resolve));
