@@ -3,23 +3,23 @@
 var videoElement = document.querySelector('video');
 
 // videoElement.width=500;
-//videoElement.height=240;
+// videoElement.height=240;
 
-var videoCanvas = document.getElementById('videoCanvas')
-var ctx = videoCanvas.getContext('2d');
+// var videoCanvas = document.getElementById('videoCanvas')
+// var ctx = videoCanvas.getContext('2d');
 
-ctx.canvas.width = videoElement.width;
-ctx.canvas.height = videoElement.height;
+// ctx.canvas.width = videoElement.width;
+// ctx.canvas.height = videoElement.height;
 
-console.log('cx ',  ctx.canvas.width, ctx.canvas.height, vRatio, hRatio);
+// console.log('cx ',  ctx.canvas.width, ctx.canvas.height, vRatio, hRatio);
 
-var vRatio = (ctx.canvas.height / videoElement.width) * videoElement.width;
+// var vRatio = (ctx.canvas.height / videoElement.width) * videoElement.width;
 // ctx.drawImage(v, 0,0, vRatio, c.height);
 
 // fill horizontally  
-var hRatio = (ctx.canvas.width / videoElement.height) * videoElement.height;
+// var hRatio = (ctx.canvas.width / videoElement.height) * videoElement.height;
 
-console.log('cx ',  ctx.canvas.width, ctx.canvas.height, vRatio, hRatio);
+// console.log('cx ',  ctx.canvas.width, ctx.canvas.height, vRatio, hRatio);
 
 // var audioSelect = document.querySelector('select#audioSource');
 /*
@@ -88,10 +88,10 @@ function gotDevices(deviceInfos) {
 function setUpGui() {
   console.log('setUpGui');
   document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
-  document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
-  document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
+  // document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
+  //document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
   document.getElementById('btnUploadFromCanvas').onclick = uploadFileFromCanvas;
-  document.getElementById('btnUpload').onclick = uploadFile;
+  // document.getElementById('btnUpload').onclick = uploadFile;
 
 }
 
@@ -224,16 +224,17 @@ function drawCanvas(canvas, img, resize) {
 
 // UPLOAD 
 
-var form = document.querySelector("form");
-var fileInput = document.querySelector(".file-input");
-var progressArea = document.querySelector(".progress-area");
-var uploadedArea = document.querySelector(".uploaded-area");
+// var form = document.querySelector("form");
+// var fileInput = document.querySelector(".file-input");
+// var progressArea = document.querySelector(".progress-area");
+// var uploadedArea = document.querySelector(".uploaded-area");
 var fileName;
 
 // document.getElementById('btnUpload').onclick = uploadFile('pro4va.png');
 
 // form.addEventListener("click", () =>{ // fileInput.click();});
 
+/*
 fileInput.onchange = ({target})=>{
   let file = target.files[0];
   if(file){
@@ -248,6 +249,7 @@ fileInput.onchange = ({target})=>{
     // uploadFile(fileName);
   }
 }
+*/
 
 function uploadFile(){
   console.log('uploadFile', fileName);
@@ -346,7 +348,7 @@ const uploadFileFromCanvas = async () => {
   var name = fileName;
   
 
-  log2video('upload ...');
+  log2video('caricamento ...');
   console.log('uploadFileFromCanvas', 'create image from canvas')
 
   // const blob = await new Promise(resolve => canvasElem.toBlob(resolve));
@@ -377,7 +379,7 @@ const uploadFileFromCanvas = async () => {
     }, 'image/jpeg')
   );
 
-
+/*
 
   console.log('uploadFileFromCanvas', blob);
   console.log('uploadFileFromCanvas', file);
@@ -429,6 +431,7 @@ const uploadFileFromCanvas = async () => {
     progressArea.innerHTML = progressHTML;
 
     if(loaded == total){
+      console.log('progress', name, loaded, total, fileSize, fileTotal);
       progressArea.innerHTML = "";
       let uploadedHTML = `<li class="row">
                             <div class="content upload">
@@ -463,6 +466,8 @@ const uploadFileFromCanvas = async () => {
 
 
   xhr.send(formData);
+
+  */
 }
 
 
@@ -508,12 +513,13 @@ function uploadForm(frm)
                           </div>
                         </li>`;
 
-    uploadedArea.classList.add("onprogress");
+    // uploadedArea.classList.add("onprogress");
 
-    progressArea.innerHTML = progressHTML;
+    // progressArea.innerHTML = progressHTML;
 
     if(loaded == total){
-      progressArea.innerHTML = "";
+      console.log('progress', loaded, total, fileSize, fileTotal);
+      // progressArea.innerHTML = "";
       let uploadedHTML = `<li class="row">
                             <div class="content upload">
                               <i class="fas fa-file-alt"></i>
@@ -524,8 +530,8 @@ function uploadForm(frm)
                             </div>
                             <i class="fas fa-check"></i>
                           </li>`;
-      uploadedArea.classList.remove("onprogress");
-      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+      // uploadedArea.classList.remove("onprogress");
+      // uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
     }
 
   });
@@ -534,7 +540,7 @@ function uploadForm(frm)
   // let data = new FormData(form);
 
 
-  console.log('uploadFileFromCanvas', 'create form values ...');
+  console.log('uploadForm', 'create form values ...');
 
   xhr.send(frm);
 
