@@ -7,7 +7,9 @@ var videoSelect = document.querySelector('select#videoSource');
 // audioSelect.onchange = getStream;
 videoSelect.onchange = getStream;
 
-getStream().then(getDevices).then(gotDevices);
+var imageCapture;
+
+getStream().then(getDevices).then(gotDevices).then(setUpGui);
 
 function getDevices() {
   // AFAICT in Safari this only gets default devices until gUM is called :/
@@ -31,6 +33,10 @@ function gotDevices(deviceInfos) {
 }
 
 function setUpGui() {
+  console.log('setUpGui');
+  document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
+  document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
+  document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
 
 }
 
@@ -52,6 +58,8 @@ function getStream() {
 
 function gotStream(stream) {
   window.stream = stream; // make stream available to console
+  let mediaStreamTrack = stream.getVideoTracks()[0];
+  imageCapture = new ImageCapture(mediaStreamTrack);
   // audioSelect.selectedIndex = [...audioSelect.options].
   //  findIndex(option => option.text === stream.getAudioTracks()[0].label);
   videoSelect.selectedIndex = [...videoSelect.options].
@@ -71,4 +79,53 @@ function showHideElementById(id) {
   } else {
     x.style.display = "none";
   }
+}
+
+function onGrabFrameButtonClick() {
+  imageCapture.grabFrame()
+  .then(imageBitmap => {
+    const canvas = document.querySelector('#canvasGrabFrame');
+    drawCanvas(canvas, imageBitmap);
+  })
+  .catch(error => console.error(error));
+}
+
+function onTakePhotoButtonClick() {
+  console.log('onTakePhotoButtonClick');
+  imageCapture.takePhoto()
+  .then(blob => {
+    console.log(blob);
+    console.log(blob.type);
+    return createImageBitmap(blob);
+  })
+  .then(imageBitmap => {
+    const canvas = document.querySelector('#canvasTakePhoto');
+    console.log(`Photo size is ${imageBitmap.width}x${imageBitmap.height}`);
+
+    drawCanvas(canvas, imageBitmap);
+    /*
+    var img = document.querySelector('img');
+    console.log(img);
+    let url = window.URL.createObjectURL(imageBitmap);
+    img.src = url;
+    */
+  })
+  .catch(error => console.error(error));
+}
+
+function onTakePhoto2ButtonClick() {
+  console.log('onTakePhoto2ButtonClick');
+  imageCapture
+    .takePhoto()
+    .then((blob) => {
+      console.log('Took photo:', blob);
+      var img = document.querySelector('img');
+      console.log(img);
+      let url = window.URL.createObjectURL(blob);
+      img.src = url;
+      window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
