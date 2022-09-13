@@ -22,7 +22,7 @@ var hRatio = (ctx.canvas.width / videoElement.height) * videoElement.height;
 console.log('cx ',  ctx.canvas.width, ctx.canvas.height, vRatio, hRatio);
 
 // var audioSelect = document.querySelector('select#audioSource');
-
+/*
 videoElement.addEventListener('play', function () {
   var $this = this; //cache
   (function loop() {
@@ -43,7 +43,7 @@ videoElement.addEventListener('play', function () {
       }
   })();
 }, 0);
-
+*/
 
 
 var videoSelect = document.querySelector('select#videoSource');
