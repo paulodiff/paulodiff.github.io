@@ -1,7 +1,24 @@
 'use strict';
 
 var videoElement = document.querySelector('video');
+var videoCanvas = document.getElementById('videoCanvas')
+var ctx = videoCanvas.getContext('2d');
 // var audioSelect = document.querySelector('select#audioSource');
+
+videoElement.addEventListener('play', function () {
+  var $this = this; //cache
+  (function loop() {
+      if (!$this.paused && !$this.ended) {
+          ctx.canvas.width = $this.videoWidth;
+          ctx.canvas.height = $this.videoHeight;
+          ctx.drawImage($this, 0, 0);
+          setTimeout(loop, 1000 / 30); // drawing at 30fps
+      }
+  })();
+}, 0);
+
+
+
 var videoSelect = document.querySelector('select#videoSource');
 
 // audioSelect.onchange = getStream;
