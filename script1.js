@@ -9,7 +9,9 @@ videoSelect.onchange = getStream;
 
 var imageCapture;
 
-getStream().then(getDevices).then(gotDevices).then(setUpGui);
+getStream().then(getDevices).then(gotDevices)
+.then(setUpGui)
+.then(onGrabFrameButtonClick);
 
 function getDevices() {
   // AFAICT in Safari this only gets default devices until gUM is called :/
@@ -37,6 +39,7 @@ function setUpGui() {
   document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
   document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
   document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
+  document.getElementById('btnUploadFromCanvas').onclick = uploadFileFromCanvas;
   document.getElementById('btnUpload').onclick = uploadFile;
 
 }
@@ -257,6 +260,8 @@ function uploadFile(){
 
   let data = new FormData(form);
 
+  console.log(data);
+
   xhr.send(data);
 }
 
@@ -264,8 +269,215 @@ function uploadFile(){
 
 // JPEG file
 let file = null;
-let blob = document.querySelector("#canvas").toBlob(function(blob) {
+let blob = document.querySelector("#canvasGrabFrame").toBlob(function(blob) {
 				file = new File([blob], 'test.jpg', { type: 'image/jpeg' });
 			}, 'image/jpeg');
 
+const formData = new FormData();
+formData.append(files[i].name, files[i]);
+request.send(formData);
+
+ formData.append("file", file);
+request.send(formData);
+
 */
+
+//-------------------------------------------
+
+const uploadFileFromCanvas = async () => {
+// function async uploadFileFromCanvas(){
+
+  let file = {};
+
+  var fileName = 'test.jpg';
+  var name = fileName;
+
+  console.log('uploadFileFromCanvas', 'create image from canvas')
+
+  // const blob = await new Promise(resolve => canvasElem.toBlob(resolve));
+
+  /*
+  var blob = document.querySelector("#canvasGrabFrame")
+        .toBlob(function(blob) {
+          console.log('insideToBlob!');
+          file = new File([blob], fileName, { type: 'image/jpeg' });
+        }, 'image/jpeg');
+  */
+  
+
+  var blob = await new Promise(resolve => 
+    document.querySelector("#canvasGrabFrame")
+      .toBlob(function(blob) {
+    console.log('insideToBlob!');
+    file = new File([blob], fileName, { type: 'image/jpeg' });
+    console.log('file builded!', file);
+    // formData.append('file', blob, 'image.jpg')
+    var frm = new FormData();
+    frm.append("image", file);
+    // frm.append(files[i].name, files[i]);
+    //request.send(formData);
+    // console.log(file);
+    // formData.append("image", file);
+    uploadForm(frm);
+    }, 'image/jpeg')
+  );
+
+
+
+  console.log('uploadFileFromCanvas', blob);
+  console.log('uploadFileFromCanvas', file);
+
+  
+
+  let xhr = new XMLHttpRequest();
+
+  console.log('uploadFileFromCanvas open xhr');
+
+  xhr.open("POST", "https://laravel-on-replit.paulodiff.repl.co/api/store-image");
+
+  xhr.onreadystatechange = function (oEvent) {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText)
+        } else {
+           console.log("Error", xhr.statusText);
+        }
+    }
+  };
+
+  xhr.upload.addEventListener("progress", ({loaded, total}) =>{
+    let fileLoaded = Math.floor((loaded / total) * 100);
+    let fileTotal = Math.floor(total / 1000);
+    let fileSize;
+    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
+
+    console.log('progress', loaded, total, fileSize, fileTotal);
+
+    let progressHTML = `<li class="row">
+                          <i class="fas fa-file-alt"></i>
+                          <div class="content">
+                            <div class="details">
+                              <span class="name">${name} • Uploading</span>
+                              <span class="percent">${fileLoaded}%</span>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress" style="width: ${fileLoaded}%"></div>
+                            </div>
+                          </div>
+                        </li>`;
+
+    uploadedArea.classList.add("onprogress");
+
+    progressArea.innerHTML = progressHTML;
+
+    if(loaded == total){
+      progressArea.innerHTML = "";
+      let uploadedHTML = `<li class="row">
+                            <div class="content upload">
+                              <i class="fas fa-file-alt"></i>
+                              <div class="details">
+                                <span class="name">${name} • Uploaded</span>
+                                <span class="size">${fileSize}</span>
+                              </div>
+                            </div>
+                            <i class="fas fa-check"></i>
+                          </li>`;
+      uploadedArea.classList.remove("onprogress");
+      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+    }
+
+  });
+
+
+  // let data = new FormData(form);
+
+
+  console.log('uploadFileFromCanvas', 'create form values ...');
+
+  var formData = new FormData();
+  //formData.append(files[i].name, files[i]);
+  //request.send(formData);
+
+  console.log(file);
+
+  formData.append("image", file);
+  // request.send(formData);
+
+
+  xhr.send(formData);
+}
+
+
+function uploadForm(frm)
+{
+
+  let xhr = new XMLHttpRequest();
+
+  console.log('uploadForm open xhr');
+
+  xhr.open("POST", "https://laravel-on-replit.paulodiff.repl.co/api/store-image");
+
+  xhr.onreadystatechange = function (oEvent) {
+    if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText)
+        } else {
+           console.log("Error", xhr.statusText);
+        }
+    }
+  };
+
+  xhr.upload.addEventListener("progress", ({loaded, total}) =>{
+    let fileLoaded = Math.floor((loaded / total) * 100);
+    let fileTotal = Math.floor(total / 1000);
+    let fileSize;
+    (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
+
+    console.log('progress', loaded, total, fileSize, fileTotal);
+
+    let progressHTML = `<li class="row">
+                          <i class="fas fa-file-alt"></i>
+                          <div class="content">
+                            <div class="details">
+                              <span class="name">${name} • Uploading</span>
+                              <span class="percent">${fileLoaded}%</span>
+                            </div>
+                            <div class="progress-bar">
+                              <div class="progress" style="width: ${fileLoaded}%"></div>
+                            </div>
+                          </div>
+                        </li>`;
+
+    uploadedArea.classList.add("onprogress");
+
+    progressArea.innerHTML = progressHTML;
+
+    if(loaded == total){
+      progressArea.innerHTML = "";
+      let uploadedHTML = `<li class="row">
+                            <div class="content upload">
+                              <i class="fas fa-file-alt"></i>
+                              <div class="details">
+                                <span class="name">${name} • Uploaded</span>
+                                <span class="size">${fileSize}</span>
+                              </div>
+                            </div>
+                            <i class="fas fa-check"></i>
+                          </li>`;
+      uploadedArea.classList.remove("onprogress");
+      uploadedArea.insertAdjacentHTML("afterbegin", uploadedHTML);
+    }
+
+  });
+
+
+  // let data = new FormData(form);
+
+
+  console.log('uploadFileFromCanvas', 'create form values ...');
+
+  xhr.send(frm);
+
+
+}
+
