@@ -61,8 +61,8 @@ videoSelect.onchange = getStream;
 var imageCapture;
 
 getStream().then(getDevices).then(gotDevices)
-.then(setUpGui)
-.then(onGrabFrameButtonClick);
+.then(setUpGui);
+// .then(onGrabFrameButtonClick);
 
 function getDevices() {
   // AFAICT in Safari this only gets default devices until gUM is called :/
