@@ -7,20 +7,35 @@
 <meta charset="utf-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 
 <style>
-#video{
+
+#video {
   object-fit: initial;
   width: 400px;
   height: 300px;
 }
+
+#btnUploadFromCanvas {
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  
+}
+
+h2 {
+  position: absolute;
+  left: 200px;
+  top: 150px;
+}
+
 </style>
 
 </head>
 
 <body>
-
+<button class="btn btn-success" id="btnUploadFromCanvas">UploadFromCanvas</button>
 <div id="container">
 
 <hr>
@@ -31,24 +46,26 @@
 </div>
 
 <hr>
-
+<small>video</small>
   <video 
-
+  width="320" height="240"
   class="embed-responsive-item"
-  autoplay muted playsinline></video>
+  autoplay muted></video>
 
 <hr>
+<h2>asdasda</h2>
+<small>videoCanvas</small>
 
+<canvas id="videoCanvas" width="400" height="240"></canvas>
 
   <div class="btn-group" role="group" aria-label="Basic example">
   <button class="btn btn-success" id="btnPlay">Play</button>
   <button class="btn btn-success" id="btnGrabFrame">Grab Frame</button>
   <button class="btn btn-success" id="btnTakePhoto">Take Photo</button>
   <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button>
-  <button class="btn btn-success" id="btnUploadFromCanvas">UploadFromCanvas</button>
+
   </div>
 
-  <canvas id="videoCanvas" width="640" height="480"></canvas>
 
   <small>canvasGrabFrame</small>
   <canvas id="canvasGrabFrame" width="320" height="240"></canvas>
