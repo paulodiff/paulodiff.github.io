@@ -17,17 +17,13 @@
   height: 300px;
 }
 
-#btnUploadFromCanvas {
-  position: absolute;
-  left: 200px;
-  top: 300px;
-  
-}
+
 
 h2 {
   position: absolute;
-  left: 200px;
-  top: 150px;
+  left: 50px;
+  top: 200px;
+  color: red;
 }
 
 </style>
@@ -35,10 +31,9 @@ h2 {
 </head>
 
 <body>
-<button class="btn btn-success" id="btnUploadFromCanvas">UploadFromCanvas</button>
-<div id="container">
 
-<hr>
+
+
 
 <div class="select">
 <label for="videoSource">Video source: </label>
@@ -46,25 +41,24 @@ h2 {
 </div>
 
 <hr>
-<small>video</small>
+
   <video 
   width="320" height="240"
   class="embed-responsive-item"
   autoplay muted></video>
 
 <hr>
-<h2>asdasda</h2>
-<small>videoCanvas</small>
+<h2 id="txtMsg">Inquadrare il soggetto</h2>
 
-<canvas id="videoCanvas" width="400" height="240"></canvas>
 
   <div class="btn-group" role="group" aria-label="Basic example">
   <button class="btn btn-success" id="btnPlay">Play</button>
   <button class="btn btn-success" id="btnGrabFrame">Grab Frame</button>
   <button class="btn btn-success" id="btnTakePhoto">Take Photo</button>
   <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button>
+  <button class="btn btn-success" id="btnUploadFromCanvas">UploadFromCanvas</button>
 
-  </div>
+  
 
 
   <small>canvasGrabFrame</small>
@@ -84,14 +78,15 @@ h2 {
   <section class="uploaded-area"></section>
 
 
- </div>
- 
+
   <script async src="script1.js" ></script>
 
 
-</div>
 
 
+<small>videoCanvas</small>
+
+<canvas id="videoCanvas" width="400" height="240"></canvas>
 
 </body>
 </html>

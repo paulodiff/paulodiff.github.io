@@ -45,6 +45,13 @@ videoElement.addEventListener('play', function () {
 }, 0);
 */
 
+function log2video(s)
+{
+  document.getElementById('txtMsg').innerHTML = s;
+  
+}
+
+
 
 var videoSelect = document.querySelector('select#videoSource');
 
@@ -145,6 +152,8 @@ function showHideElementById(id) {
 
 function onGrabFrameButtonClick() {
   console.log('onGrabFrameButtonClick');
+  log2video('foto acquisita!');
+
   imageCapture.grabFrame()
   .then(imageBitmap => {
     const canvas = document.querySelector('#canvasGrabFrame');
@@ -335,7 +344,9 @@ const uploadFileFromCanvas = async () => {
 
   var fileName = 'test.jpg';
   var name = fileName;
+  
 
+  log2video('upload ...');
   console.log('uploadFileFromCanvas', 'create image from canvas')
 
   // const blob = await new Promise(resolve => canvasElem.toBlob(resolve));
@@ -382,9 +393,11 @@ const uploadFileFromCanvas = async () => {
   xhr.onreadystatechange = function (oEvent) {
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          console.log(xhr.responseText)
+          console.log('onreadystatechange', xhr.responseText)
+          log2video(xhr.responseText);
         } else {
            console.log("Error", xhr.statusText);
+           log2video('ERRORE!');
         }
     }
   };
@@ -396,6 +409,7 @@ const uploadFileFromCanvas = async () => {
     (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
 
     console.log('progress', loaded, total, fileSize, fileTotal);
+    log2video('progress' & loaded  & total & fileSize & fileTotal);
 
     let progressHTML = `<li class="row">
                           <i class="fas fa-file-alt"></i>
@@ -464,9 +478,11 @@ function uploadForm(frm)
   xhr.onreadystatechange = function (oEvent) {
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          console.log(xhr.responseText)
+          console.log('uploadForm', xhr.responseText)
+          log2video('Upload ok!');
         } else {
            console.log("Error", xhr.statusText);
+           log2video('Upload ERROR!');
         }
     }
   };
