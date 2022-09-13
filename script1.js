@@ -172,6 +172,9 @@ fileInput = document.querySelector(".file-input"),
 progressArea = document.querySelector(".progress-area"),
 uploadedArea = document.querySelector(".uploaded-area");
 
+
+document.getElementById('btnUpload').onclick = uploadFile('prova.png');
+
 form.addEventListener("click", () =>{
   // fileInput.click();
 });
@@ -206,7 +209,7 @@ function uploadFile(name){
            console.log("Error", xhr.statusText);
         }
     }
-};
+  };
 
   xhr.upload.addEventListener("progress", ({loaded, total}) =>{
     let fileLoaded = Math.floor((loaded / total) * 100);
