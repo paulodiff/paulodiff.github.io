@@ -37,6 +37,19 @@ h2 {
   color: red;
 }
 
+.videoInsert1 {
+    position: absolute; 
+    right: 0; 
+    bottom: 0;
+    min-width: 50%; 
+    min-height: 50%;
+    width: auto; 
+    height: auto; 
+    z-index: -100;
+    background-size: cover;
+    overflow: hidden;
+}
+
 </style>
 
 </head>
@@ -53,10 +66,14 @@ h2 {
 
 <hr>
 
+
+<div class="wrapper">
   <video 
+  class="videoInsert"
   width="320" height="240"
   class="embed-responsive-item"
   autoplay muted></video>
+</div>
 
 <hr>
 <h2 id="txtMsg">Inquadrare il soggetto</h2>
@@ -64,10 +81,10 @@ h2 {
 
   <div class="btn-group" role="group" aria-label="Basic example">
   <button class="btn btn-success" id="btnPlay">Play</button>
-  <button class="btn btn-success" id="btnGrabFrame">Grab Frame</button>
+  <button class="btn btn-success" id="btnGrabFrame">Scatta</button>
   <button class="btn btn-success" id="btnTakePhoto">Take Photo</button>
   <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button>
-  <button class="btn btn-success" id="btnUploadFromCanvas">UploadFromCanvas</button>
+  <button class="btn btn-success" id="btnUploadFromCanvas">Carica</button>
 
   
 
@@ -79,6 +96,7 @@ h2 {
   <div class="wrapper">
   <header>File Uploader JavaScript</header>
 
+  
   <form action="#">
     <input class="file-input" type="file" name="image">
     <i class="fas fa-cloud-upload-alt"></i>
@@ -95,9 +113,7 @@ h2 {
 
 
 
-<small>videoCanvas</small>
-
-<canvas id="videoCanvas" width="400" height="240"></canvas>
+<canvas id="videoCanvas" width="400" height="240" hidden></canvas>
 
 </body>
 </html>
