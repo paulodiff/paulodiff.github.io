@@ -212,7 +212,7 @@ imageCapture.takePhoto()
 
 function onTakePhotoButtonClick() {
   console.log('onTakePhotoButtonClick on img');
-  log2video('Foto acquisita2! Carica o scatta di nuovo!');
+  
   imageCapture
     .takePhoto()
     .then((blob) => {
@@ -223,7 +223,10 @@ function onTakePhotoButtonClick() {
 
       var img = document.querySelector('img');
       img.src = URL.createObjectURL(blob);
-      img.onload = () => { URL.revokeObjectURL(this.src); }
+      img.onload = () => { 
+        log2video('Foto acquisita2! Carica o scatta di nuovo!');
+        URL.revokeObjectURL(this.src); 
+      }
       //  let url = window.URL.createObjectURL(blob);
       // img.src = url;
       // window.URL.revokeObjectURL(url);
