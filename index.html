@@ -11,6 +11,21 @@
 
 <style>
 
+
+.mybtn {
+  background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	background-color:#d0451b;
+	border:2px solid #942911;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:10px 18px;
+	text-decoration:none;
+}
+
 #video1 {
   object-fit: initial;
   width: 400px;
@@ -19,8 +34,10 @@
 
 #btnSwitchCamera {
   position: absolute;
-  left: 250px;
-  top: 80px;
+  right: 10px;
+  top: 10px;
+
+
 
 }
 
@@ -28,37 +45,20 @@
   position: absolute;
   left: 50px;
   top: 80px;
-
-  background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
 }
 
 
 #btnTakePhoto {
   position: absolute;
-  left: 50px;
-  top: 140px;
+  right: 10px;
+  bottom : 90px
+}
 
-  background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
+#btnUploadFromImg {
+  position: absolute;
+  right: 10px;
+  bottom : 20px
+  
 }
 
 
@@ -67,44 +67,31 @@
   left: 50px;
   top: 240px;
 
-  background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
 }
 
-#btnUploadFromImg {
+.message2 {
   position: absolute;
-  left: 50px;
-  top: 300px;
-
-  background-color:#44c767;
-	border-radius:28px;
-	border:1px solid #18ab29;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:17px;
-	padding:16px 31px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #2f6627;
+  left: 10px;
+  top : 20px
+  display: flex;
+  margin: 0px;
+  border-radius: 0px;
+  border: 0px dashed #1c87c9;
+  align-items:center;
+  justify-content:center;
+  background-color: coral;
 }
+
 
 h2 {
   position: absolute;
-  left: 20px;
-  top: 200px;
+  left: 10px;
+  bottom : 20px
+  line-height: 100px;
   color: yellow;
   font-family: "Times New Roman", Times, serif;
   font-size: 15px;
+  background-color: blue; 
 }
 
 .videoInsert {
@@ -126,7 +113,7 @@ h2 {
 <body>
 
 
-<select  id="selectVideoSource" class="form-select" id="videoSource"></select>
+<select  id="selectVideoSource" class="form-select" id="videoSource" hidden></select>
 
 
 
@@ -140,17 +127,17 @@ h2 {
 </div>
 
 
-<h2 id="txtMsg">Inquadrare il documento</h2>
+<h2 id="txtMsg" class="message">Inquadrare il documento</h2>
 
 
  
   <!-- <button class="btn btn-success" id="btnPlay">Play</button> -->
-  <button class="btn btn-success" id="btnSwitchCamera">Camera</button>
-  <button class="btn btn-success" id="btnGrabFrame">Scatta</button>
-  <button class="btn btn-success" id="btnTakePhoto">Scatta2</button>
+  <button class="btn btn-success mybtn" id="btnSwitchCamera">Camera</button>
+  <button class="btn btn-success  mybtn" id="btnGrabFrame">Scatta</button>
+  <button class="btn btn-success  mybtn" id="btnTakePhoto">Scatta2</button>
   <!-- <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button> -->
-  <button class="btn btn-success" id="btnUploadFromCanvas">Carica</button>
-  <button class="btn btn-success" id="btnUploadFromImg">Carica2</button>
+  <button class="btn btn-success mybtn" id="btnUploadFromCanvas">Carica</button>
+  <button class="btn btn-success mybtn" id="btnUploadFromImg">Carica2</button>
 
   
 
