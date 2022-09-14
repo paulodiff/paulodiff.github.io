@@ -62,6 +62,7 @@ videoSelect.onchange = changeVideo;
 
 var imageCapture;
 var currentCapabilities;
+var file;
 
 
 getStream().then(getDevices).then(gotDevices)
@@ -195,17 +196,35 @@ function onTakePhotoButtonClick() {
 }
 */
 
+/*
+
+const img = document.querySelector('img');
+// ...
+imageCapture.takePhoto()
+    .then(blob => {
+    img.src = URL.createObjectURL(blob);
+    img.onload = () => { URL.revokeObjectURL(this.src); }
+    })
+    .catch(error => console.error('takePhoto() error:', error));
+
+*/
+
 function onTakePhotoButtonClick() {
   console.log('onTakePhotoButtonClick on img');
   imageCapture
     .takePhoto()
     .then((blob) => {
       console.log('Took photo:', blob);
+
+      console.log('Took photo init file');
+      file = new File([blob], 'test.png', { type: 'image/png' });
+
       var img = document.querySelector('img');
-      console.log(img);
-      let url = window.URL.createObjectURL(blob);
-      img.src = url;
-      window.URL.revokeObjectURL(url);
+      img.src = URL.createObjectURL(blob);
+      img.onload = () => { URL.revokeObjectURL(this.src); }
+      //  let url = window.URL.createObjectURL(blob);
+      // img.src = url;
+      // window.URL.revokeObjectURL(url);
     })
     .catch((error) => {
       console.error(error);
@@ -463,10 +482,14 @@ request.send(formData);
 
 //-------------------------------------------
 
+const uploadFileFromImg = async () => {
+
+}
+
 const uploadFileFromCanvas = async () => {
 // function async uploadFileFromCanvas(){
 
-  let file = {};
+  
 
   var fileName = 'test.jpg';
   var name = fileName;
