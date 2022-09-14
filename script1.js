@@ -119,8 +119,9 @@ function setUpGui() {
 }
 
 function riprova () {
-  showElementById('btnTakephoto');
+  
   console.log('riprova .. ');
+  showElementById('btnTakePhoto');
   hideElementById('btnUploadFromImg');
   // hideElementById('btnRiprova');
   log2video('Inquadrare il documento e cliccare su scatta');
@@ -176,12 +177,14 @@ function handleError(error) {
 function hideElementById(id) {
   console.log('hide', id);
   var x = document.getElementById(id);
+  console.log(x);
   x.style.display = "none";
 }
 
 function showElementById(id) {
   console.log('show', id);
   var x = document.getElementById(id);
+  console.log(x);
   x.style.display = "block";
 }
 
