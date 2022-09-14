@@ -484,6 +484,10 @@ request.send(formData);
 
 const uploadFileFromImg = async () => {
 
+  console.log('uploadFileFromImg', '....')
+  var frm = new FormData();
+  frm.append("image", file);
+  uploadForm(frm)
 }
 
 const uploadFileFromCanvas = async () => {
