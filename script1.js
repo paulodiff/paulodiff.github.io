@@ -105,6 +105,7 @@ function setUpGui() {
   // document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
   document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
   document.getElementById('btnUploadFromCanvas').onclick = uploadFileFromCanvas;
+  document.getElementById('btnUploadFromImg').onclick = uploadFileFromImg;
   // document.getElementById('btnUpload').onclick = uploadFile;
 
 }
@@ -211,6 +212,7 @@ imageCapture.takePhoto()
 
 function onTakePhotoButtonClick() {
   console.log('onTakePhotoButtonClick on img');
+  log2video('Foto acquisita2! Carica o scatta di nuovo!');
   imageCapture
     .takePhoto()
     .then((blob) => {
@@ -412,13 +414,13 @@ function uploadFile(){
     }
   };
 
-  xhr.upload.addEventListener("progress", ({loaded, total}) =>{
+  xhr.upload.addEventListener("uploadFile progress", ({loaded, total}) =>{
     let fileLoaded = Math.floor((loaded / total) * 100);
     let fileTotal = Math.floor(total / 1000);
     let fileSize;
     (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
 
-    console.log('progress', loaded, total, fileSize, fileTotal);
+    console.log('uploadFile progress', loaded, total, fileSize, fileTotal);
 
     let progressHTML = `<li class="row">
                           <i class="fas fa-file-alt"></i>
@@ -649,7 +651,9 @@ function uploadForm(frm)
     let fileSize;
     (fileTotal < 1024) ? fileSize = fileTotal + " KB" : fileSize = (loaded / (1024*1024)).toFixed(2) + " MB";
 
-    console.log('progress', loaded, total, fileSize, fileTotal);
+    console.log('uploadForm progress', loaded, total, fileSize, fileTotal);
+
+    log2video('Caricati ' + fileSize + ' di ' + fileTotal);
 
     let progressHTML = `<li class="row">
                           <i class="fas fa-file-alt"></i>
@@ -669,7 +673,7 @@ function uploadForm(frm)
     // progressArea.innerHTML = progressHTML;
 
     if(loaded == total){
-      console.log('progress', loaded, total, fileSize, fileTotal);
+      console.log('uploadForm progress', loaded, total, fileSize, fileTotal);
       // progressArea.innerHTML = "";
       let uploadedHTML = `<li class="row">
                             <div class="content upload">
