@@ -56,16 +56,29 @@ function log2video(s)
 var videoSelect = document.querySelector('select#videoSource');
 
 // audioSelect.onchange = getStream;
-videoSelect.onchange = getStream;
+// videoSelect.onchange = getStream;
+
+videoSelect.onchange = changeVideo;
 
 var imageCapture;
+var currentCapabilities;
+
 
 getStream().then(getDevices).then(gotDevices)
+.then(getPhotoCapabilities).then(gotPhotoCapabilities)
 .then(setUpGui);
 // .then(onGrabFrameButtonClick);
 
+
+function changeVideo (){
+  getStream()
+.then(getPhotoCapabilities).then(gotPhotoCapabilities)
+.then(setUpGui);
+}
+
 function getDevices() {
   // AFAICT in Safari this only gets default devices until gUM is called :/
+  console.log('getDevices');
   return navigator.mediaDevices.enumerateDevices();
 }
 
@@ -126,6 +139,7 @@ function getStream() {
 }
 
 function gotStream(stream) {
+  console.log('gotStream');
   window.stream = stream; // make stream available to console
   let mediaStreamTrack = stream.getVideoTracks()[0];
   imageCapture = new ImageCapture(mediaStreamTrack);
@@ -200,6 +214,120 @@ function onTakePhoto2ButtonClick() {
     .catch((error) => {
       console.error(error);
     });
+}
+
+
+function getPhotoCapabilities() {
+  return imageCapture.getPhotoCapabilities();
+}
+
+function gotPhotoCapabilities(c) {
+  currentCapabilities = c;
+  return console.log('gotPhotoCapabilities', JSON.stringify(currentCapabilities));
+}
+
+function getPhotoCapabilities1() {
+  console.log('getPhotoCapabilities');
+  imageCapture.getPhotoCapabilities()
+  .then(function(caps) {
+    console.log('getPhotoCapabilities', caps);
+    return true;
+    
+    /*
+    theCapabilities = caps;
+
+    if (theCapabilities.imageHeight) {
+      theHeightSlider.min = theCapabilities.imageHeight.min;
+      theHeightSlider.max = theCapabilities.imageHeight.max;
+      theHeightSlider.value = theCapabilities.imageHeight.current;
+      theHeightSliderValue.value = theHeightSlider.value;
+      document.getElementById("height-area").style.visibility = "visible";
+      theImageCapturer.setOptions({ imageHeight : theHeightSlider.value });
+    }
+
+    if (isChrome57or58) {
+      if (theCapabilities.zoom.min !== theCapabilities.zoom.max) {
+        theZoomSlider.min = theCapabilities.zoom.min;
+        theZoomSlider.max = theCapabilities.zoom.max;
+        theZoomSlider.value = theCapabilities.zoom.current;
+        theZoomSlider.step = theCapabilities.zoom.step;
+        theZoomSliderValue.value = theZoomSlider.value;
+        document.getElementById("zoom-area").style.visibility = "visible";
+      }
+      focusModeLabel.innerHTML = 'focus : ' + theCapabilities.focusMode;
+
+    } else { 
+      var zoom = theTrack.getCapabilities().zoom;
+      if (zoom) {
+        theZoomSlider.min = zoom.min;
+        theZoomSlider.max = zoom.max;
+        theZoomSlider.step = zoom.step;
+        theZoomSlider.value = theTrack.getSettings().zoom;
+        theZoomSliderValue.value = theZoomSlider.value;
+        document.getElementById("zoom-area").style.visibility = "visible";
+      }
+
+      focusModeLabel.innerHTML =
+          'focus : ' + theTrack.getCapabilities().focusMode;
+    }
+
+    */
+
+  });
+
+}
+
+/*
+
+const capture = new ImageCapture(track);
+const { imageWidth, imageHeight } = await capture.getPhotoCapabilities();
+const width = setInRange(required_width, imageWidth);
+const height = setInRange(required_height, imageHeight);
+const photoSettings = (width && height) ? {
+  imageWidth: width,
+  imageHeight: height
+} : null;
+const pic = await capture.takePhoto(photoSettings);
+
+function setInRange(value, range) {
+  if(!range) return NaN;
+  let x = Math.min(range.max, Math.max(range.min, value));
+  x = Math.round(x / range.step) * range.step; // take `step` into account
+  return x;
+}
+
+
+*/
+function photoCapapilies2str(c) {
+
+  var ret = '';
+  var theCapabilities = c;
+  return JSON.stringify(c);
+
+  /*
+
+  if (theCapabilities.imageHeight) {
+    theHeightSlider.min = theCapabilities.imageHeight.min;
+    theHeightSlider.max = theCapabilities.imageHeight.max;
+    theHeightSlider.value = theCapabilities.imageHeight.current;
+    theHeightSliderValue.value = theHeightSlider.value;
+    // document.getElementById("height-area").style.visibility = "visible";
+    // theImageCapturer.setOptions({ imageHeight : theHeightSlider.value });
+  }
+
+  if (isChrome57or58) {
+    if (theCapabilities.zoom.min !== theCapabilities.zoom.max) {
+      theZoomSlider.min = theCapabilities.zoom.min;
+      theZoomSlider.max = theCapabilities.zoom.max;
+      theZoomSlider.value = theCapabilities.zoom.current;
+      theZoomSlider.step = theCapabilities.zoom.step;
+      theZoomSliderValue.value = theZoomSlider.value;
+      document.getElementById("zoom-area").style.visibility = "visible";
+    }
+    focusModeLabel.innerHTML = 'focus : ' + theCapabilities.focusMode;
+
+    */
+
 }
 
 function drawCanvas(canvas, img, resize) {
