@@ -113,6 +113,7 @@ function setUpGui() {
 
   hideElementById('btnUploadFromImg');
   hideElementById('btnRiprova');
+  hideElementById('photo');
   // showHideElementById('btnGrabFrame');
   // showHideElementById('btnUploadFromCanvas');
 
@@ -123,7 +124,7 @@ function riprova () {
   console.log('riprova .. ');
   showElementById('btnTakePhoto');
   hideElementById('btnUploadFromImg');
-  // hideElementById('btnRiprova');
+  hideElementById('photo');
   log2video('Inquadrare il documento e cliccare su scatta');
 }
 
@@ -249,6 +250,7 @@ function onTakePhotoButtonClick() {
         showElementById('btnUploadFromImg');
         showElementById('btnRiprova');
         hideElementById('btnTakePhoto');
+        showElementById('photo');
         log2video('Foto acquisita. Clicca su invia o riprova');
         URL.revokeObjectURL(this.src); 
       }
@@ -544,6 +546,7 @@ const uploadFileFromImg = async () => {
   var frm = new FormData();
   frm.append("image", file);
   uploadForm(frm)
+  setUpGui();
 }
 
 const uploadFileFromCanvas = async () => {
@@ -691,10 +694,12 @@ function uploadForm(frm)
     if (xhr.readyState === 4) {
         if (xhr.status === 200) {
           console.log('uploadForm', xhr.responseText)
-          log2video('Caricamento ok!');
+          log2video('Caricamento completato');
+          setUpGui();
         } else {
            console.log("Error", xhr.statusText);
            log2video('Upload ERROR!');
+           setUpGui();
         }
     }
   };
