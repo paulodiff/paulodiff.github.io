@@ -26,6 +26,20 @@
 	text-decoration:none;
 }
 
+.infobtn {
+  background:linear-gradient(to bottom, #007dc1 5%, #0061a7 100%);
+	background-color:#007dc1;
+	border-radius:5px;
+	border:1px solid #124d77;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+	padding:10px 7px;
+	text-decoration:none;
+}
+
 #video1 {
   object-fit: initial;
   width: 400px;
@@ -36,9 +50,6 @@
   position: absolute;
   right: 10px;
   top: 10px;
-
-
-
 }
 
 #btnGrabFrame {
@@ -62,6 +73,13 @@
 }
 
 
+#btnRiprova {
+  position: absolute;
+  right: 10px;
+  bottom : 190px
+}
+
+
 #btnUploadFromCanvas {
   position: absolute;
   left: 50px;
@@ -69,29 +87,20 @@
 
 }
 
-.message2 {
+.message1 {
   position: absolute;
   left: 10px;
   top : 20px
-  display: flex;
-  margin: 0px;
-  border-radius: 0px;
-  border: 0px dashed #1c87c9;
   align-items:center;
   justify-content:center;
   background-color: coral;
 }
 
 
-h2 {
+#txtMsg {
   position: absolute;
   left: 10px;
-  bottom : 20px
-  line-height: 100px;
-  color: yellow;
-  font-family: "Times New Roman", Times, serif;
-  font-size: 15px;
-  background-color: blue; 
+  bottom: 20px;
 }
 
 .videoInsert {
@@ -113,40 +122,34 @@ h2 {
 <body>
 
 
+
+<h2 id="txtMsg" class="infobtn">Inquadrare il documento e cliccare su scatta</h2>
+
+ 
+<!-- <button class="btn btn-success" id="btnPlay">Play</button> -->
+<button class="btn btn-success mybtn" id="btnSwitchCamera">Cambia foto camera</button>
+<button class="btn btn-success  mybtn" id="btnGrabFrame">Scatta1</button>
+<button class="btn btn-success  mybtn" id="btnTakePhoto">Scatta</button>
+<button class="btn btn-success  mybtn" id="btnRiprova">Riprova</button>
+<!-- <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button> -->
+<button class="btn btn-success mybtn" id="btnUploadFromCanvas">Carica1</button>
+<button class="btn btn-success mybtn" id="btnUploadFromImg">Carica</button>
+
 <select  id="selectVideoSource" class="form-select" id="videoSource" hidden></select>
 
-
-
-
 <div class="wrapper">
-  <video 
-  class="videoInsert"
-  width="320" height="240"
-  class="embed-responsive-item"
-  autoplay muted></video>
+<video 
+class="videoInsert"
+width="320" height="240"
+class="embed-responsive-item"
+autoplay muted></video>
 </div>
 
 
-<h2 id="txtMsg" class="message">Inquadrare il documento</h2>
-
-
- 
-  <!-- <button class="btn btn-success" id="btnPlay">Play</button> -->
-  <button class="btn btn-success mybtn" id="btnSwitchCamera">Camera</button>
-  <button class="btn btn-success  mybtn" id="btnGrabFrame">Scatta</button>
-  <button class="btn btn-success  mybtn" id="btnTakePhoto">Scatta2</button>
-  <!-- <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button> -->
-  <button class="btn btn-success mybtn" id="btnUploadFromCanvas">Carica</button>
-  <button class="btn btn-success mybtn" id="btnUploadFromImg">Carica2</button>
-
-  
-
-
-
-  <canvas id="canvasGrabFrame" width="320" height="240" ></canvas>
+<canvas id="canvasGrabFrame" width="320" height="240" ></canvas>
 
   <!-- per TakePhoto .... -->
-  <img hidden>
+<img hidden>
 
 
   <!--

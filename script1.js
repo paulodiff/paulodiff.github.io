@@ -110,6 +110,9 @@ function setUpGui() {
   document.getElementById('btnSwitchCamera').onclick = switchCamera;
   // document.getElementById('btnUpload').onclick = uploadFile;
 
+  showHideElementById('btnGrabFrame');
+  showHideElementById('btnUploadFromCanvas');
+
 }
 
 function getStream() {
@@ -170,7 +173,7 @@ function showHideElementById(id) {
 
 function onGrabFrameButtonClick() {
   console.log('onGrabFrameButtonClick');
-  log2video('Foto acquisita! Carica o scatta di nuovo!');
+  log2video('Foto acquisita. Clicca su carica o annulla');
 
   imageCapture.grabFrame()
   .then(imageBitmap => {
@@ -214,7 +217,7 @@ imageCapture.takePhoto()
 
 function onTakePhotoButtonClick() {
   console.log('onTakePhotoButtonClick on img');
-  
+  log2video('Acquisizione foto ...');
   imageCapture
     .takePhoto()
     .then((blob) => {
@@ -226,7 +229,7 @@ function onTakePhotoButtonClick() {
       var img = document.querySelector('img');
       img.src = URL.createObjectURL(blob);
       img.onload = () => { 
-        log2video('Foto acquisita2! Carica o scatta di nuovo!');
+        log2video('Foto acquisita. Clicca su carica o riprova');
         URL.revokeObjectURL(this.src); 
       }
       //  let url = window.URL.createObjectURL(blob);
