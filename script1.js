@@ -53,7 +53,8 @@ function log2video(s)
 
 
 
-var videoSelect = document.querySelector('select#videoSource');
+// var videoSelect = document.querySelector('select#videoSource');
+var videoSelect = document.getElementById('selectVideoSource');
 
 // audioSelect.onchange = getStream;
 // videoSelect.onchange = getStream;
@@ -106,6 +107,7 @@ function setUpGui() {
   document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
   document.getElementById('btnUploadFromCanvas').onclick = uploadFileFromCanvas;
   document.getElementById('btnUploadFromImg').onclick = uploadFileFromImg;
+  document.getElementById('btnSwitchCamera').onclick = switchCamera;
   // document.getElementById('btnUpload').onclick = uploadFile;
 
 }
@@ -370,7 +372,33 @@ function drawCanvas(canvas, img, resize) {
 }
 
 
-// UPLOAD 
+function switchCamera() {
+  const $select = document.querySelector('#selectVideoSource');
+  // console.log($select.value);
+  // $select.value = 'steve';
+  var currSelected =  $select.selectedIndex + 1;
+  var newSelected = (currSelected < $select.length) ? currSelected : 0 ;
+  
+  console.log($select.selectedIndex, newSelected);
+  
+  $select.selectedIndex = newSelected;
+
+  var event = new Event('change');
+
+// Dispatch it.
+  $select.dispatchEvent(event);
+  // $select.fireEvent("onchange");
+  /*
+  for (i = 0; i < $select.length; i++) {
+        console.log(i, $select.length, $select.selectedIndex, $select.options[i].value, $select.options[i].text);
+  
+  }
+  */
+  
+};
+
+
+// UPLOAD  --------------------------------------------------
 
 // var form = document.querySelector("form");
 // var fileInput = document.querySelector(".file-input");
