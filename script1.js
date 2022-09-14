@@ -108,11 +108,22 @@ function setUpGui() {
   document.getElementById('btnUploadFromCanvas').onclick = uploadFileFromCanvas;
   document.getElementById('btnUploadFromImg').onclick = uploadFileFromImg;
   document.getElementById('btnSwitchCamera').onclick = switchCamera;
+  document.getElementById('btnRiprova').onclick = riprova;
   // document.getElementById('btnUpload').onclick = uploadFile;
 
-  showHideElementById('btnGrabFrame');
-  showHideElementById('btnUploadFromCanvas');
+  hideElementById('btnUploadFromImg');
+  hideElementById('btnRiprova');
+  // showHideElementById('btnGrabFrame');
+  // showHideElementById('btnUploadFromCanvas');
 
+}
+
+function riprova () {
+  showElementById('btnTakephoto');
+  console.log('riprova .. ');
+  hideElementById('btnUploadFromImg');
+  // hideElementById('btnRiprova');
+  log2video('Inquadrare il documento e cliccare su scatta');
 }
 
 function getStream() {
@@ -162,13 +173,16 @@ function handleError(error) {
 }
 
 
-function showHideElementById(id) {
+function hideElementById(id) {
+  console.log('hide', id);
   var x = document.getElementById(id);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
+  x.style.display = "none";
+}
+
+function showElementById(id) {
+  console.log('show', id);
+  var x = document.getElementById(id);
+  x.style.display = "block";
 }
 
 function onGrabFrameButtonClick() {
@@ -229,7 +243,10 @@ function onTakePhotoButtonClick() {
       var img = document.querySelector('img');
       img.src = URL.createObjectURL(blob);
       img.onload = () => { 
-        log2video('Foto acquisita. Clicca su carica o riprova');
+        showElementById('btnUploadFromImg');
+        showElementById('btnRiprova');
+        hideElementById('btnTakePhoto');
+        log2video('Foto acquisita. Clicca su invia o riprova');
         URL.revokeObjectURL(this.src); 
       }
       //  let url = window.URL.createObjectURL(blob);

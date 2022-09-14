@@ -114,6 +114,7 @@
     background-size: cover;
     overflow: hidden;
 }
+.hidden{ display: none; }
 
 </style>
 
@@ -127,13 +128,13 @@
 
  
 <!-- <button class="btn btn-success" id="btnPlay">Play</button> -->
-<button class="btn btn-success mybtn" id="btnSwitchCamera">Cambia foto camera</button>
-<button class="btn btn-success  mybtn" id="btnGrabFrame">Scatta1</button>
+<button class="btn btn-success mybtn" id="btnSwitchCamera">Cambia la fotocamera</button>
+<button class="btn btn-success  mybtn hidden" id="btnGrabFrame" >Scatta1</button>
 <button class="btn btn-success  mybtn" id="btnTakePhoto">Scatta</button>
 <button class="btn btn-success  mybtn" id="btnRiprova">Riprova</button>
 <!-- <button class="btn btn-success" id="btnTakePhoto2">Take Photo2</button> -->
-<button class="btn btn-success mybtn" id="btnUploadFromCanvas">Carica1</button>
-<button class="btn btn-success mybtn" id="btnUploadFromImg">Carica</button>
+<button class="btn btn-success mybtn hidden" id="btnUploadFromCanvas">Carica1</button>
+<button class="btn btn-success mybtn" id="btnUploadFromImg">Invia</button>
 
 <select  id="selectVideoSource" class="form-select" id="videoSource" hidden></select>
 
