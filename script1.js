@@ -102,7 +102,7 @@ function setUpGui() {
   console.log('setUpGui');
   document.getElementById('btnGrabFrame').onclick = onGrabFrameButtonClick;
   // document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
-  //document.getElementById('btnTakePhoto2').onclick = onTakePhoto2ButtonClick;
+  document.getElementById('btnTakePhoto').onclick = onTakePhotoButtonClick;
   document.getElementById('btnUploadFromCanvas').onclick = uploadFileFromCanvas;
   // document.getElementById('btnUpload').onclick = uploadFile;
 
@@ -175,7 +175,7 @@ function onGrabFrameButtonClick() {
   })
   .catch(error => console.error(error));
 }
-
+/*
 function onTakePhotoButtonClick() {
   console.log('onTakePhotoButtonClick');
   imageCapture.takePhoto()
@@ -189,18 +189,14 @@ function onTakePhotoButtonClick() {
     console.log(`Photo size is ${imageBitmap.width}x${imageBitmap.height}`);
 
     drawCanvas(canvas, imageBitmap);
-    /*
-    var img = document.querySelector('img');
-    console.log(img);
-    let url = window.URL.createObjectURL(imageBitmap);
-    img.src = url;
-    */
+  
   })
   .catch(error => console.error(error));
 }
+*/
 
-function onTakePhoto2ButtonClick() {
-  console.log('onTakePhoto2ButtonClick');
+function onTakePhotoButtonClick() {
+  console.log('onTakePhotoButtonClick on img');
   imageCapture
     .takePhoto()
     .then((blob) => {
